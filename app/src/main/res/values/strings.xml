@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">FirebaseExample</string>
+    <string name="button_send">Send</string>
+</resources>

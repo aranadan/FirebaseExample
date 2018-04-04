@@ -7,7 +7,10 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -25,11 +28,13 @@ public class MessageAdapter extends ArrayAdapter<Message> {
         }
         TextView mUserName = convertView.findViewById(R.id.userName);
         TextView mTextMessage = convertView.findViewById(R.id.textMessage);
+        ImageView mPhotoView = convertView.findViewById(R.id.imageView);
 
         Message message = getItem(position);
 
         mUserName.setText(message.getUserName());
         mTextMessage.setText(message.getTextMessage());
+        Picasso.get().load(message.getUriPhotoUser()).into(mPhotoView);
 
         return convertView;
 

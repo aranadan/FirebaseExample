@@ -1,11 +1,13 @@
 package com.fox.andrey.firebaseexample;
 
+
 import com.google.firebase.database.IgnoreExtraProperties;
 
 @IgnoreExtraProperties
 public class Message {
    private String userName = "John Doe";
-           private String textMessage;
+   private String textMessage;
+   private String uriPhotoUser;
 
     // Default constructor required for calls to DataSnapshot.getValue(User.class)
     public Message() {
@@ -30,4 +32,13 @@ public class Message {
     public void setTextMessage(String textMessage) {
         this.textMessage = textMessage;
     }
+
+    public String  getUriPhotoUser() {
+        return uriPhotoUser;
+    }
+
+    public void setUriPhotoUser(String uriPhotoUser) {
+        this.uriPhotoUser = uriPhotoUser;
+    }
+
 }

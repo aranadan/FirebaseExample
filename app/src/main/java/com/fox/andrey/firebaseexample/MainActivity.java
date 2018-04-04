@@ -1,5 +1,6 @@
 package com.fox.andrey.firebaseexample;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -34,50 +35,6 @@ public class MainActivity extends AppCompatActivity {
         initialize();
     }
 
-    /*private class MessageHolder extends RecyclerView.ViewHolder{
-        private TextView mMessageText;
-        private TextView mUserName;
-
-
-        private MessageHolder(View itemView) {
-            super(itemView);
-            mMessageText = itemView.findViewById(R.id.textMessage);
-            mUserName = itemView.findViewById(R.id.userName);
-        }
-
-        private void bind(Message message){
-            mMessageText.setText(message.getTextMessage());
-            mUserName.setText(message.getUserName());
-        }
-
-    }
-
-    private class MessageAdapter extends RecyclerView.Adapter<MessageHolder>{
-        private List<Message> itemsList;
-
-        MessageAdapter(List<Message> itemsList) {
-            this.itemsList = itemsList;
-        }
-
-        @NonNull
-        @Override
-        public MessageHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
-            View view = inflater.inflate(R.layout.message_item,parent,false);
-            return new MessageHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull MessageHolder holder, int position) {
-            Message message = itemsList.get(position);
-            holder.bind(message);
-        }
-
-        @Override
-        public int getItemCount() {
-            return itemsList.size();
-        }
-    }*/
 
     private void initialize(){
 
@@ -118,6 +75,9 @@ public class MainActivity extends AppCompatActivity {
             mRef.addChildEventListener(mChildEventListener);
         }
 
+
+        final Intent intent = getIntent();
+
         List<Message> messageItems = new ArrayList<>();
         messageAdapter = new MessageAdapter(MainActivity.this, R.layout.message_item, messageItems);
 
@@ -149,6 +109,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Message message = new Message(mEditText.getText().toString());
+                message.setUserName(intent.getStringExtra("name"));
+                //Uri uri = (Uri) intent.getParcelableExtra("uriPhoto");
+                message.setUriPhotoUser(intent.getStringExtra("uriPhoto"));
+                //Log.d("TAGG",String.valueOf(uri));
                 mRef.push().setValue(message);
                 mEditText.setText("");
             }
